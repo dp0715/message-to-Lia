@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing Heart for Lia</title>
+    <style>
+        /* General Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: radial-gradient(circle, #000, #111);
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+            animation: gradient 10s infinite alternate;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Background Gradient Animation */
+        @keyframes gradient {
+            0% { background: radial-gradient(circle, #000, #111); }
+            100% { background: radial-gradient(circle, #220022, #330033); }
+        }
+
+        /* Heart Container */
+        .heart-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 50px;
+        }
+
+        /* Glowing Dots */
+        .dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #ff4e50;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 4px #ff4e50;
+            opacity: 0.4;
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Floating Hearts */
+        .floating-heart {
+            position: absolute;
+            bottom: -10vh;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4e50;
+            border-radius: 50%;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px 5px #ff4e50;
+            animation: floatUp 5s infinite ease-in-out;
+        }
+
+        .floating-heart::after,
+        .floating-heart::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4e50;
+            border-radius: 50%;
+        }
+
+        .floating-heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .floating-heart::after {
+            left: -10px;
+            top: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+        }
+
+        /* Twinkling Stars */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px 2px white;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Animated Messages */
+        .message {
+            position: absolute;
+            font-size: 1.2em;
+            color: #ffcccc;
+            text-shadow: 0 0 10px #ff4e50;
+            animation: fadeInOut 8s infinite;
+            opacity: 0;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            10%, 20% { opacity: 1; }
+        }
+
+        .caption {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #ffcccc;
+            text-shadow: 0 0 8px #ff4e50;
+        }
+    </style>
+</head>
+<body>
+    <!-- Heart -->
+    <div class="heart-container" id="heart"></div>
+
+    <!-- Caption -->
+    <div class="caption">you make my day brighter lia</div>
+
+    <!-- Script for Heart, Stars, Floating Hearts, and Messages -->
+    <script>
+        const heartContainer = document.getElementById("heart");
+
+        // Heart Shape Coordinates
+        const heartPoints = [
+            [50, 30], [60, 20], [70, 20], [80, 30], [90, 50], [85, 70], [75, 90],
+            [65, 105], [50, 120], [35, 105], [25, 90], [15, 70], [10, 50], [20, 30],
+            [30, 20], [40, 20], [50, 30]
+        ];
+
+        // Create Glowing Dots for Heart
+        heartPoints.forEach((point, index) => {
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            dot.style.left = `${point[0]}%`;
+            dot.style.top = `${point[1]}%`;
+            dot.style.animationDelay = `${index * 0.1}s`;
+            heartContainer.appendChild(dot);
+        });
+
+        // Add Floating Hearts
+        for (let i = 0; i < 15; i++) {
+            const heart = document.createElement("div");
+            heart.classList.add("floating-heart");
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDuration = `${3 + Math.random() * 3}s`;
+            document.body.appendChild(heart);
+        }
+
+        // Add Twinkling Stars with Random Delays
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.animationDelay = `${Math.random() * 2}s`; // Random delay for natural twinkle
+            document.body.appendChild(star);
+        }
+
+        // Add Messages at Random Positions
+        const messages = [
+            "I love everything about you",
+            "I'm so happy around you",
+            "You're beautiful and amazing",
+            "I'm so grateful to have you",
+            "I wanna be the reason to your smile",
+            "You're lovely and sweet",
+            "You're funny and caring",
+            "Always fun and joyful",
+            "You light up my world like no one else.",
+            "Every moment with you feels magical.",
+            "Your smile is my favorite sight.",
+            "You make my heart race in the best way.",
+            "I’m the luckiest person to have you by my side.",
+            "You make my dreams feel like reality.",
+            "Your kindness inspires me every day.",
+            "You are the reason my days are so bright.",
+            "With you, everything feels right.",
+            "You are my safe space and my adventure all at once.",
+            "You make life so much more beautiful.",
+            "Your laugh is the sweetest sound to my ears.",
+            "You are my best friend and my greatest love.",
+            "I love you more than words can say.",
+            "You bring peace to my chaos.",
+            "You make even ordinary days feel extraordinary.",
+            "Your presence makes my world complete.",
+            "You are the love I always dreamed of.",
+            "Every day, I fall for you more and more.",
+            "You are my everything, and so much more."
+        ];
+
+        messages.forEach((text, index) => {
+            const message = document.createElement("div");
+            message.classList.add("message");
+            message.style.top = `${Math.random() * 80}vh`;
+            message.style.left = `${Math.random() * 80}vw`;
+            message.style.animationDelay = `${index * 2}s`;
+            message.innerText = text;
+            document.body.appendChild(message);
+        });
+    </script>
+</body>
+</html>
